@@ -10,7 +10,7 @@ export interface IAccExec {
   mail?: string;
   repcom1?: string;
   repcom2?: string;
-  segmentos?: ISegmento[];
+  segmento?: ISegmento;
   regions?: IRegion[];
 }
 

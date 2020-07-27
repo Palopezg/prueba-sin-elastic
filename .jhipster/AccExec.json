@@ -32,17 +32,18 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
+      "relationshipType": "many-to-one",
       "otherEntityName": "segmento",
       "otherEntityRelationshipName": "accExec",
-      "relationshipName": "segmento"
+      "relationshipName": "segmento",
+      "otherEntityField": "descripcion"
     },
     {
       "relationshipType": "many-to-many",
       "otherEntityName": "region",
       "otherEntityRelationshipName": "accExec",
       "relationshipName": "region",
-      "otherEntityField": "id",
+      "otherEntityField": "descripcion",
       "ownerSide": true
     }
   ],

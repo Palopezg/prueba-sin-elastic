@@ -8,6 +8,12 @@
     -->
     <changeSet id="20200727161146-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="segmento_id"
+                                 baseTableName="acc_exec"
+                                 constraintName="fk_acc_exec_segmento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="segmento"/>
+
         <addForeignKeyConstraint baseColumnNames="acc_exec_id"
                                  baseTableName="acc_exec_region"
                                  constraintName="acc_exec_regio_acc_exec_id"

@@ -103,6 +103,9 @@ export const AccExec = (props: IAccExecProps) => {
                 <th className="hand" onClick={sort('repcom2')}>
                   Repcom 2 <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  Segmento <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -121,6 +124,7 @@ export const AccExec = (props: IAccExecProps) => {
                   <td>{accExec.mail}</td>
                   <td>{accExec.repcom1}</td>
                   <td>{accExec.repcom2}</td>
+                  <td>{accExec.segmento ? <Link to={`segmento/${accExec.segmento.id}`}>{accExec.segmento.descripcion}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${accExec.id}`} color="info" size="sm">

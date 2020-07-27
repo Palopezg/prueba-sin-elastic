@@ -1,6 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,10 +27,6 @@ public class Segmento implements Serializable {
 
     @Column(name = "valor")
     private String valor;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "segmentos", allowSetters = true)
-    private AccExec accExec;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -66,19 +61,6 @@ public class Segmento implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
-    }
-
-    public AccExec getAccExec() {
-        return accExec;
-    }
-
-    public Segmento accExec(AccExec accExec) {
-        this.accExec = accExec;
-        return this;
-    }
-
-    public void setAccExec(AccExec accExec) {
-        this.accExec = accExec;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

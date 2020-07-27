@@ -2,7 +2,6 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.PruebaSinElasticApp;
 import com.mycompany.myapp.domain.Segmento;
-import com.mycompany.myapp.domain.AccExec;
 import com.mycompany.myapp.repository.SegmentoRepository;
 import com.mycompany.myapp.service.SegmentoService;
 import com.mycompany.myapp.service.dto.SegmentoCriteria;
@@ -327,26 +326,6 @@ public class SegmentoResourceIT {
 
         // Get all the segmentoList where valor does not contain UPDATED_VALOR
         defaultSegmentoShouldBeFound("valor.doesNotContain=" + UPDATED_VALOR);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllSegmentosByAccExecIsEqualToSomething() throws Exception {
-        // Initialize the database
-        segmentoRepository.saveAndFlush(segmento);
-        AccExec accExec = AccExecResourceIT.createEntity(em);
-        em.persist(accExec);
-        em.flush();
-        segmento.setAccExec(accExec);
-        segmentoRepository.saveAndFlush(segmento);
-        Long accExecId = accExec.getId();
-
-        // Get all the segmentoList where accExec equals to accExecId
-        defaultSegmentoShouldBeFound("accExecId.equals=" + accExecId);
-
-        // Get all the segmentoList where accExec equals to accExecId + 1
-        defaultSegmentoShouldNotBeFound("accExecId.equals=" + (accExecId + 1));
     }
 
     /**

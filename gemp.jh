@@ -23,11 +23,13 @@ entity AccExec {
 }
 
 relationship ManyToMany {
-	AccExec{Region} to Region{AccExec}
+	AccExec{Region(descripcion)} to Region{AccExec}
 }
 
-relationship OneToMany {
-	AccExec{Segmento} to Segmento
+
+
+relationship ManyToOne {
+	AccExec{Segmento(descripcion)} to Segmento
 }
 
 

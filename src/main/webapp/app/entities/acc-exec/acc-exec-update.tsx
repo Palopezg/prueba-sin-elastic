@@ -7,6 +7,8 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { ISegmento } from 'app/shared/model/segmento.model';
+import { getEntities as getSegmentos } from 'app/entities/segmento/segmento.reducer';
 import { IRegion } from 'app/shared/model/region.model';
 import { getEntities as getRegions } from 'app/entities/region/region.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './acc-exec.reducer';
@@ -18,9 +20,10 @@ export interface IAccExecUpdateProps extends StateProps, DispatchProps, RouteCom
 
 export const AccExecUpdate = (props: IAccExecUpdateProps) => {
   const [idsregion, setIdsregion] = useState([]);
+  const [segmentoId, setSegmentoId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { accExecEntity, regions, loading, updating } = props;
+  const { accExecEntity, segmentos, regions, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/acc-exec' + props.location.search);
@@ -33,6 +36,7 @@ export const AccExecUpdate = (props: IAccExecUpdateProps) => {
       props.getEntity(props.match.params.id);
     }
 
+    props.getSegmentos();
     props.getRegions();
   }, []);
 
@@ -120,6 +124,19 @@ export const AccExecUpdate = (props: IAccExecUpdateProps) => {
                 <AvField id="acc-exec-repcom2" type="text" name="repcom2" />
               </AvGroup>
               <AvGroup>
+                <Label for="acc-exec-segmento">Segmento</Label>
+                <AvInput id="acc-exec-segmento" type="select" className="form-control" name="segmento.id">
+                  <option value="" key="0" />
+                  {segmentos
+                    ? segmentos.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.descripcion}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
+              <AvGroup>
                 <Label for="acc-exec-region">Region</Label>
                 <AvInput
                   id="acc-exec-region"
@@ -133,7 +150,7 @@ export const AccExecUpdate = (props: IAccExecUpdateProps) => {
                   {regions
                     ? regions.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
+                          {otherEntity.descripcion}
                         </option>
                       ))
                     : null}
@@ -158,6 +175,7 @@ export const AccExecUpdate = (props: IAccExecUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
+  segmentos: storeState.segmento.entities,
   regions: storeState.region.entities,
   accExecEntity: storeState.accExec.entity,
   loading: storeState.accExec.loading,
@@ -166,6 +184,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
+  getSegmentos,
   getRegions,
   getEntity,
   updateEntity,
