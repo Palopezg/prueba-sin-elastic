@@ -10,15 +10,7 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "accExec",
-      "otherEntityRelationshipName": "segmento",
-      "relationshipName": "accExec",
-      "otherEntityField": "id"
-    }
-  ],
+  "relationships": [],
   "changelogDate": "20200727160946",
   "entityTableName": "segmento",
   "dto": "no",

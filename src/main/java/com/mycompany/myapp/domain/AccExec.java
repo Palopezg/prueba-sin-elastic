@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -45,9 +46,9 @@ public class AccExec implements Serializable {
     @Column(name = "repcom_2")
     private String repcom2;
 
-    @OneToMany(mappedBy = "accExec")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Segmento> segmentos = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = "accExecs", allowSetters = true)
+    private Segmento segmento;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -156,29 +157,17 @@ public class AccExec implements Serializable {
         this.repcom2 = repcom2;
     }
 
-    public Set<Segmento> getSegmentos() {
-        return segmentos;
+    public Segmento getSegmento() {
+        return segmento;
     }
 
-    public AccExec segmentos(Set<Segmento> segmentos) {
-        this.segmentos = segmentos;
+    public AccExec segmento(Segmento segmento) {
+        this.segmento = segmento;
         return this;
     }
 
-    public AccExec addSegmento(Segmento segmento) {
-        this.segmentos.add(segmento);
-        segmento.setAccExec(this);
-        return this;
-    }
-
-    public AccExec removeSegmento(Segmento segmento) {
-        this.segmentos.remove(segmento);
-        segmento.setAccExec(null);
-        return this;
-    }
-
-    public void setSegmentos(Set<Segmento> segmentos) {
-        this.segmentos = segmentos;
+    public void setSegmento(Segmento segmento) {
+        this.segmento = segmento;
     }
 
     public Set<Region> getRegions() {

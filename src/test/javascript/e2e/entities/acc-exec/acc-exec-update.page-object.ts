@@ -14,6 +14,7 @@ export default class AccExecUpdatePage {
   mailInput: ElementFinder = element(by.css('input#acc-exec-mail'));
   repcom1Input: ElementFinder = element(by.css('input#acc-exec-repcom1'));
   repcom2Input: ElementFinder = element(by.css('input#acc-exec-repcom2'));
+  segmentoSelect: ElementFinder = element(by.css('select#acc-exec-segmento'));
   regionSelect: ElementFinder = element(by.css('select#acc-exec-region'));
 
   getPageTitle() {
@@ -76,6 +77,22 @@ export default class AccExecUpdatePage {
     return this.repcom2Input.getAttribute('value');
   }
 
+  async segmentoSelectLastOption() {
+    await this.segmentoSelect.all(by.tagName('option')).last().click();
+  }
+
+  async segmentoSelectOption(option) {
+    await this.segmentoSelect.sendKeys(option);
+  }
+
+  getSegmentoSelect() {
+    return this.segmentoSelect;
+  }
+
+  async getSegmentoSelectedOption() {
+    return this.segmentoSelect.element(by.css('option:checked')).getText();
+  }
+
   async regionSelectLastOption() {
     await this.regionSelect.all(by.tagName('option')).last().click();
   }
@@ -126,6 +143,7 @@ export default class AccExecUpdatePage {
     await waitUntilDisplayed(this.saveButton);
     await this.setRepcom2Input('repcom2');
     expect(await this.getRepcom2Input()).to.match(/repcom2/);
+    await this.segmentoSelectLastOption();
     // this.regionSelectLastOption();
     await this.save();
     await waitUntilHidden(this.saveButton);

@@ -7,8 +7,6 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { IAccExec } from 'app/shared/model/acc-exec.model';
-import { getEntities as getAccExecs } from 'app/entities/acc-exec/acc-exec.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './segmento.reducer';
 import { ISegmento } from 'app/shared/model/segmento.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -17,10 +15,9 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface ISegmentoUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const SegmentoUpdate = (props: ISegmentoUpdateProps) => {
-  const [accExecId, setAccExecId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { segmentoEntity, accExecs, loading, updating } = props;
+  const { segmentoEntity, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/segmento' + props.location.search);
@@ -32,8 +29,6 @@ export const SegmentoUpdate = (props: ISegmentoUpdateProps) => {
     } else {
       props.getEntity(props.match.params.id);
     }
-
-    props.getAccExecs();
   }, []);
 
   useEffect(() => {
@@ -88,19 +83,6 @@ export const SegmentoUpdate = (props: ISegmentoUpdateProps) => {
                 </Label>
                 <AvField id="segmento-valor" type="text" name="valor" />
               </AvGroup>
-              <AvGroup>
-                <Label for="segmento-accExec">Acc Exec</Label>
-                <AvInput id="segmento-accExec" type="select" className="form-control" name="accExec.id">
-                  <option value="" key="0" />
-                  {accExecs
-                    ? accExecs.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
-              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/segmento" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -120,7 +102,6 @@ export const SegmentoUpdate = (props: ISegmentoUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
-  accExecs: storeState.accExec.entities,
   segmentoEntity: storeState.segmento.entity,
   loading: storeState.segmento.loading,
   updating: storeState.segmento.updating,
@@ -128,7 +109,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getAccExecs,
   getEntity,
   updateEntity,
   createEntity,

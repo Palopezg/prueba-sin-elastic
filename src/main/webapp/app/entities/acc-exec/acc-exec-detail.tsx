@@ -53,12 +53,14 @@ export const AccExecDetail = (props: IAccExecDetailProps) => {
             <span id="repcom2">Repcom 2</span>
           </dt>
           <dd>{accExecEntity.repcom2}</dd>
+          <dt>Segmento</dt>
+          <dd>{accExecEntity.segmento ? accExecEntity.segmento.descripcion : ''}</dd>
           <dt>Region</dt>
           <dd>
             {accExecEntity.regions
               ? accExecEntity.regions.map((val, i) => (
                   <span key={val.id}>
-                    <a>{val.id}</a>
+                    <a>{val.descripcion}</a>
                     {accExecEntity.regions && i === accExecEntity.regions.length - 1 ? '' : ', '}
                   </span>
                 ))

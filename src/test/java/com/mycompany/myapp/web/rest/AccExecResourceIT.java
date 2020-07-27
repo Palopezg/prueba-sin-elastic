@@ -803,7 +803,7 @@ public class AccExecResourceIT {
         Segmento segmento = SegmentoResourceIT.createEntity(em);
         em.persist(segmento);
         em.flush();
-        accExec.addSegmento(segmento);
+        accExec.setSegmento(segmento);
         accExecRepository.saveAndFlush(accExec);
         Long segmentoId = segmento.getId();
 

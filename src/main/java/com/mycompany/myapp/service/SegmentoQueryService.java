@@ -91,10 +91,6 @@ public class SegmentoQueryService extends QueryService<Segmento> {
             if (criteria.getValor() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getValor(), Segmento_.valor));
             }
-            if (criteria.getAccExecId() != null) {
-                specification = specification.and(buildSpecification(criteria.getAccExecId(),
-                    root -> root.join(Segmento_.accExec, JoinType.LEFT).get(AccExec_.id)));
-            }
         }
         return specification;
     }

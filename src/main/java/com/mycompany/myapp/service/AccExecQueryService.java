@@ -108,7 +108,7 @@ public class AccExecQueryService extends QueryService<AccExec> {
             }
             if (criteria.getSegmentoId() != null) {
                 specification = specification.and(buildSpecification(criteria.getSegmentoId(),
-                    root -> root.join(AccExec_.segmentos, JoinType.LEFT).get(Segmento_.id)));
+                    root -> root.join(AccExec_.segmento, JoinType.LEFT).get(Segmento_.id)));
             }
             if (criteria.getRegionId() != null) {
                 specification = specification.and(buildSpecification(criteria.getRegionId(),
